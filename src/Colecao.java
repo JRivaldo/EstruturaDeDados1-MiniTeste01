@@ -14,7 +14,9 @@ public class Colecao {
 	}
 	
 	public void add(String e){
-		this.verificaTamanho();
+		if(size == elementos.length){
+			this.redimencionaVetor();
+		}		
 		elementos[size] = e;
 		++size;
 	}
@@ -31,33 +33,27 @@ public class Colecao {
 		return size;
 	}
 	
-	private void verificaTamanho(){
-		if(size == elementos.length){
-			String [] ele2 = new String[elementos.length + this.DIMENSAO];
-			for(int i = 0; i < elementos.length; i++ ){
-				ele2[i] = elementos[i];
-			}
-			elementos = ele2;
+	private void redimencionaVetor(){
+		String [] ele2 = new String[elementos.length + this.DIMENSAO];
+		for(int i = 0; i < elementos.length; i++ ){
+			ele2[i] = elementos[i];
 		}
+		elementos = ele2;
+		
 	}
 	
 	public void addInicio(String valor){
-		this.verificaTamanho();
-		if(size != 0){
-			for(int i = size; i > 0; i--){
-				this.elementos[i] = this.elementos[i - 1];				
-			}
-		}		
-		this.elementos[0] = valor;
-		++size;
+		add(valor,0);
 	}
 	
 	public void add(String valor, int pos){
-		this.verificaTamanho();
+		if(size == elementos.length){
+			this.redimencionaVetor();
+		}
 		if((pos > size)||(pos < 0)){
 			throw new RuntimeException("Posição inválida da coleção!");
 		}
-		else if(size != 0){
+		if(size != 0){
 			for(int i = size; i > pos; i--){
 				this.elementos[i] = this.elementos[i - 1];				
 			}
