@@ -53,11 +53,10 @@ public class Colecao {
 		if((pos > size)||(pos < 0)){
 			throw new RuntimeException("Posição inválida da coleção!");
 		}
-		if(size != 0){
-			for(int i = size; i > pos; i--){
+		for(int i = size; i > pos; i--){
 				this.elementos[i] = this.elementos[i - 1];				
-			}
 		}
+		
 		this.elementos[pos] = valor;
 		++size;
 	}
